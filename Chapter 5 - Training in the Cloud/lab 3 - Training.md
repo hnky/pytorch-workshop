@@ -10,7 +10,7 @@ mkdir train
 cd train
 
 # Download the training script
-wget https://raw.githubusercontent.com/GlobalAICommunity/back-together-2021/main/workshop-assets/amls/train.py
+wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/workshop-assets/amls/train.py
 
 # Go back to the project directory
 cd .. 
