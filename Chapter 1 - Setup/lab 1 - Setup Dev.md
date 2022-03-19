@@ -71,17 +71,17 @@ Select: Linux
 
 Select: Continue
 
-![](img/10.png)
+![](img/9-5.png)
 
 Enter the password: back2gether
 
-![](img/11.png)
+![](img/10.png)
 
 You are now connected to your Remote Dev Container!
 
 ### Final configuration
 
-![](img/12.png)
+![](img/11.png)
 
 1. Open a Terminal, you can do this using the Top menu > Terminal > New Terminal
 2. The terminal appears at the bottom of VSCode
@@ -96,7 +96,7 @@ You are now connected to your Remote Dev Container!
 6. Search for: REST Client
 7. Click install
 
-![](img/13.png)
+![](img/12.png)
 
 1. To activate the extensions you need to reload VSCode
 2. In the Top Menu click "View" > Command Palette (crtl-shift-p)
