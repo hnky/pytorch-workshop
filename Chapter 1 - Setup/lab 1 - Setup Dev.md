@@ -109,7 +109,7 @@ You are now connected to your Remote Dev Container!
 
 ![](img/13.png)
 
-1. In the terminal type "az login"
+1. In the terminal type "az login --use-device-code"
 2. Open a browser window and navigate to: [https://microsoft.com/devicelogin](https://microsoft.com/devicelogin)
 3. Enter the code displayed in the terminal
 4. Sign in with your Microsoft Account that has access to the subscription you want to use.
@@ -126,9 +126,8 @@ You are now connected to your Remote Dev Container!
    Replace SubscriptionId with the subscriptionid you want to use.
 4. Now this subscription will be used to create your Azure Resources by default
 
-{% hint style="success" %}
-You are now ready to start developing using Visual Studio Code and a Remote Dev Container
-{% endhint %}
+
+> You are now ready to start developing using Visual Studio Code and a Remote Dev Container
 
 ## &#x20;Checklist
 
