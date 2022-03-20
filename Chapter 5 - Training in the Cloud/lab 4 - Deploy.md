@@ -1,14 +1,9 @@
 # Lab 5 - Deploy to Managed Endpoint
 
 
-> **This lab may not work in an Azure Pass Subscription.**
-> 
-> For this lab to work, the Microsoft.PolicyInsights needs to be registered in your subscription. [Follow this tutorial](https://docs.microsoft.com/azure/azure-resource-manager/management/resource-providers-and-types#register-resource-provider)
-{% endhint %}
-
 ```bash
-# Delete the compute cluster (only needed if you have an Azure Pass subscription)
-az ml compute delete -n gpu-cluster
+az provider register -n 'Microsoft.PolicyInsights'
+az provider show -n Microsoft.PolicyInsights --query registrationState
 ```
 
 In this lab you are going to deploy the model in managed endpoint.
