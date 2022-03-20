@@ -50,6 +50,14 @@ dependencies:
     - pillow==5.4.1
 ```
 
+### Create a managed endpoint
+
+> Replace: \<your-name> with your unique name, like: henks-endpoint
+
+```
+az ml online-endpoint create -n <your-name>
+```
+
 ### Create the endpoint configuration
 
 Create an empty yml file for the deployment configuration.
