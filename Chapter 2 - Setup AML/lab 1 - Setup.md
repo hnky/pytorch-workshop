@@ -48,7 +48,7 @@ This command will create an Azure Machine Learning Compute cluster with 1 node t
 >To speed up the training process you can use a GPU enabled NC6 machine
 
 ```
-az ml compute create --type amlcompute -n gpu-cluster --min-instances 0 --max-instances 1 --size STANDARD_NC6
+az ml compute create --type amlcompute -n gpu-cluster --min-instances 1 --max-instances 1 --size STANDARD_NC6
 ```
 
 > View your created Azure Machine Learning Compute cluster on [https://ml.azure.com](https://ml.azure.com)
