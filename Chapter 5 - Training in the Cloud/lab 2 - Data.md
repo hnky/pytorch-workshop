@@ -44,7 +44,7 @@ az ml dataset create -f dataset.yml
 To see if the dataset is created you can list all the datasets in your workspace with the command below.
 
 ```bash
-az ml data list --output table
+az ml dataset list --output table
 ```
 
 ### Checklist
