@@ -23,7 +23,7 @@ cd ..
 ## Create a dataset in your Azure Machine Learning workspace
 
 ```bash
-code data.yml
+code dataset.yml
 ```
 
 Add this content to the file
@@ -32,14 +32,13 @@ Add this content to the file
 $schema: https://azuremlschemas.azureedge.net/latest/dataset.schema.json
 name: LegoSimpsons
 version: 1
-datastore: azureml:workspaceblobstore
 local_path: ./data
 ```
 
 Now run the CLI command to upload the data to your default datastore and create the dataset
 
 ```bash
-az ml data create -f data.yml
+az ml dataset create -f dataset.yml
 ```
 
 To see if the dataset is created you can list all the datasets in your workspace with the command below.
