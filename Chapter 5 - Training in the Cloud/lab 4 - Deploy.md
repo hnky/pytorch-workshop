@@ -107,7 +107,7 @@ Add the content below to the file
 Use the command below to invoke the endpoint!
 
 ```yaml
-az ml online-endpoint invoke -n <your-endpoint-name> --request-file request.json
+az ml online-endpoint invoke --request-file request.json -n <your-endpoint-name>
 ```
 
 As a result you show see that it has seen Bart Simpson on the image.
