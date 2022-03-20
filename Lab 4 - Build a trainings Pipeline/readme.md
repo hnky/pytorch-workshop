@@ -58,7 +58,7 @@ command: python train.py --data ${{inputs.training_data}} --train_output ${{outp
 Download the trainings code
 
 ```
-wget 
+wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/train.py src/train.py 
 ```
 
 ### Create the register model component
@@ -98,6 +98,11 @@ environment: azureml:AzureML-pytorch-1.10-ubuntu18.04-py38-cuda11-gpu:15
 command: python register.py --model_assets_path ${{inputs.model_assets_path}} --model_name ${{inputs.model_name}} --model_file_name ${{inputs.model_file_name}} --label_file_name ${{inputs.label_file_name}}
 ```
 
+```
+wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/register.py src/register.py 
+```
+
+
 ### Create the register model component
 
 ```
@@ -131,7 +136,7 @@ command: python onnx.py --input_assets_path ${{inputs.input_assets_path}} --outp
 ```
 
 ```
-
+wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/onnx.py src/onnx.py
 ```
 
 
