@@ -113,3 +113,12 @@ az ml online-endpoint invoke -n <your-endpoint-name> --request-file request.json
 As a result you show see that it has seen Bart Simpson on the image.
 
 ### Recap
+
+In this lab you have created an endpoint running your PyTorch model.
+
+**You have:**
+
+* [ ] Downloaded the inference script
+* [ ] Created a endpoint
+* [ ] Created a deployment
+* [ ] Tested you endpoint
