@@ -63,8 +63,6 @@ While the job is running, you can stream the live output of the job using the co
 az ml job stream -n <run_name>
 ```
 
-> **In the current version of the SDK the command above does not work.**
-
 If you just want to see the status of the job use the command below.
 
 ```bash
