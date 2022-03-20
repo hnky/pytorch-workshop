@@ -35,10 +35,9 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 experiment_name: SimpsonsClassification
 code:
   local_path: ./train
-command: python train.py --data {inputs.training_data} --num-epochs 8 --model-name SimpsonsClassification
-environment: azureml:AzureML-pytorch-1.7-ubuntu18.04-py37-cuda11-gpu:3
-compute:
-  target: azureml:gpu-cluster
+command: python train.py --data {inputs.training_data} --num-epochs 12 --model-name SimpsonsClassification
+environment: azureml:AzureML-pytorch-1.10-ubuntu18.04-py38-cuda11-gpu:15
+compute: azureml:gpu-cluster
 inputs:
   training_data:
     mode: mount
