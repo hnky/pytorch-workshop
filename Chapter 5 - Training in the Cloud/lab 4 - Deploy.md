@@ -1,5 +1,7 @@
 # Lab 5 - Deploy to Managed Endpoint
 
+> In this lab you are going to deploy the model in managed endpoint.
+
 
 Before you continue you have to make sure you have "Microsoft.PolicyInsights" resource policy enabled in your Azure subscription. 
 
@@ -8,9 +10,8 @@ az provider register -n 'Microsoft.PolicyInsights'
 az provider show -n Microsoft.PolicyInsights --query registrationState
 ```
 
-In this lab you are going to deploy the model in managed endpoint.
 
-### Get the scoring script
+## Get the scoring script
 
 ```yaml
 # Create a directory
@@ -24,30 +25,7 @@ wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/workshop-asset
 > Stay in the same directory
 
 
-### Create the scoring environment
-
-Create an empty yml file for the environment configuration.
-
-```yaml
-code conda.yml
-```
-Add the content below to the conda.yml file.
-
-```yaml
-name: project_environment
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - python=3.6.2
-  - pip:
-    - azureml-defaults
-    - torch
-    - torchvision
-    - pillow==5.4.1
-```
-
-### Create a managed endpoint
+## Create an online endpoint
 
 > Replace: <your-endpoint-name> with your unique name, like: henks-endpoint-v1
 
@@ -55,7 +33,7 @@ dependencies:
 az ml online-endpoint create -n <your-endpoint-name>
 ```
 
-### Create the endpoint configuration
+## Create an online endpoint deployment
 
 Create an empty yml file for the deployment configuration.
 
@@ -75,20 +53,19 @@ code_configuration:
   code: 
     local_path: ./
   scoring_script: score.py
-environment: 
-  conda_file: ./conda.yml
-  image: mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04:20210727.v1
+environment: azureml:AzureML-pytorch-1.7-ubuntu18.04-py37-cpu-inference:32
 instance_type: Standard_F2s_v2
 instance_count: 1
 ```
 
-Use the command below to create a managed endpoint
+Use the command below to deploy the online endpoint deployment configuration and route all the traffic to this deployment.
 
 ```yaml
 az ml online-deployment create -f deployment.yml --all-traffic
 ```
+  
 
-### Test the endpoint
+## Test the online endpoint
 
 Create a new file for the request json.
 
@@ -112,7 +89,7 @@ az ml online-endpoint invoke --request-file request.json -n <your-endpoint-name>
 
 As a result you show see that it has seen Bart Simpson on the image.
 
-### Recap
+## Recap
 
 In this lab you have created an endpoint running your PyTorch model.
 
