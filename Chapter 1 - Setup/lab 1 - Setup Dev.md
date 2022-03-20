@@ -127,6 +127,10 @@ You are now connected to your Remote Dev Container!
 4. Now this subscription will be used to create your Azure Resources by default
 
 
+#### Update to the lastest versions
+1.  In the terminal type: " az extension remove -n ml"
+2.  In the terminal type: " az extension add -n ml"
+
 > You are now ready to start developing using Visual Studio Code and a Remote Dev Container
 
 ## &#x20;Checklist
