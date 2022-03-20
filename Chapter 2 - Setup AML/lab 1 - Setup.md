@@ -24,7 +24,7 @@ az group create --name <resource-group-name> --location <location>
 To create a new workspace where the services are automatically created, use the following command:
 
 ```
-az ml workspace create -w <workspace-name> -g <resource-group-name>
+az ml workspace create -n <workspace-name> -g <resource-group-name>
 ```
 
 >If the az ml command does not work run: az extension add -n ml -y
