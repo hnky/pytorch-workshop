@@ -1,4 +1,4 @@
-# Lab 1 - Setup cloud environment
+# Lab 2 - Setup Azure Machine Learning
 
 ## Create a Azure Machine Learning Workspace
 
