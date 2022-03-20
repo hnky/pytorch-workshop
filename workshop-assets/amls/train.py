@@ -22,16 +22,16 @@ run = Run.get_context()
 
 ### Parse incoming parameters
 parser = argparse.ArgumentParser()
-parser.add_argument("--data-folder", type=str, dest="data_path", help="data folder mounting point", default="")
+parser.add_argument("--data-path", type=str, dest="data_path", help="data folder mounting point", default="")
 parser.add_argument("--num-epochs", type=int, dest="num_epochs", help="Number of epochs", default="")
 parser.add_argument('--learning-rate', dest="learning_rate", type=float, default=0.001, help='learning rate')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum')
 
-#args = parser.parse_args()
-#data_path = args.data_folder
-#num_epochs = args.num_epochs
-#learning_rate = args.learning_rate
-#momentum = args.momentum
+args = parser.parse_args()
+data_path = args.data_path
+num_epochs = args.num_epochs
+learning_rate = args.learning_rate
+momentum = args.momentum
 
 ### Prepare the dataset
 data_transforms = {
