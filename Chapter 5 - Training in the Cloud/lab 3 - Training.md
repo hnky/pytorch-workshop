@@ -35,7 +35,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 experiment_name: SimpsonsClassification
 code:
   local_path: ./train
-command: python train.py --data-path ${{inputs.training_data}} --num-epochs 12 
+command: python train.py --data-path ${{inputs.training_data}} --num-epochs 12 --model-name LegoSimpsons
 environment: azureml:AzureML-pytorch-1.10-ubuntu18.04-py38-cuda11-gpu:15
 compute: azureml:gpu-cluster
 inputs:
