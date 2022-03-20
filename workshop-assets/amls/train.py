@@ -26,12 +26,15 @@ parser.add_argument("--data-path", type=str, dest="data_path", help="data folder
 parser.add_argument("--num-epochs", type=int, dest="num_epochs", help="Number of epochs", default="")
 parser.add_argument('--learning-rate', dest="learning_rate", type=float, default=0.001, help='learning rate')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum')
+parser.add_argument('--model-name', type=str, default="Simpsons", dest="model_name", help='Name of the model')
+
 
 args = parser.parse_args()
 data_path = args.data_path
 num_epochs = args.num_epochs
 learning_rate = args.learning_rate
 momentum = args.momentum
+model_name = args.model_name 
 
 ### Prepare the dataset
 data_transforms = {
@@ -107,8 +110,8 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=5):
             epoch_acc = running_corrects.double() / dataset_sizes[phase]
 
             # Log the los / acc to AMLS
-            run.log("{} Loss".format(phase), np.float(epoch_loss))
-            run.log("{} Acc".format(phase), np.float(epoch_acc))
+            run.log("{} Loss".format(phase), float(epoch_loss))
+            run.log("{} Acc".format(phase), float(epoch_acc))
 
             # deep copy the model
             if phase == 'val' and epoch_acc > best_acc:
@@ -117,7 +120,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=5):
 
         print()
     
-    run.log("accuracy", np.float(best_acc))
+    run.log("accuracy", float(best_acc))
 
     time_elapsed = time.time() - since
     print('Training complete in {:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
@@ -149,5 +152,25 @@ torch.save(model_ft, './outputs/model.pth')
 # Save the labels
 with open('./outputs/labels.txt', 'w') as f:
     f.writelines(["%s\n" % item  for item in class_names])
+
+# Export the model
+print("== Export model to onnx ==")
+x = torch.randn(1, 3, 224, 224).to(device)
+torch.onnx.export(model_ft,x,"./outputs/model.onnx")
+
+run.upload_file(name='model/pytorch/labels.txt', path_or_stream="./outputs/labels.txt")
+run.upload_file(name='model/pytorch/model.pth', path_or_stream="./outputs/model.pth")
+run.upload_file(name='model/onnx/model.pth', path_or_stream="./outputs/model.onnx")
+
+model_pytorch = run.register_model(model_name=model_name+"-pytorch", model_path='model/pytorch/')
+model_onnx = run.register_model(model_name=model_name+"-onnx", model_path='model/onnx/')
+
+print("== ONNX Model Registered")
+print('Name:', model_onnx.name)
+print('Version:', model_onnx.version)
+
+print("== PyTorch Model Registered")
+print('Name:', model_pytorch.name)
+print('Version:', model_pytorch.version)
 
 print("== Done == ")
