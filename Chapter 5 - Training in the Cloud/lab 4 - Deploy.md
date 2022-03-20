@@ -1,6 +1,8 @@
 # Lab 5 - Deploy to Managed Endpoint
 
 
+Before you continue you have to make sure you have "Microsoft.PolicyInsights" resource policy enabled in your Azure subscription. 
+
 ```bash
 az provider register -n 'Microsoft.PolicyInsights'
 az provider show -n Microsoft.PolicyInsights --query registrationState
@@ -47,10 +49,10 @@ dependencies:
 
 ### Create a managed endpoint
 
-> Replace: \<your-name> with your unique name, like: henks-endpoint
+> Replace: \<your-endpoint-name> with your unique name, like: henks-endpoint-v1
 
 ```
-az ml online-endpoint create -n <your-name>
+az ml online-endpoint create -n <your-endpoint-name>
 ```
 
 ### Create the endpoint configuration
@@ -64,41 +66,26 @@ code deployment.yml
 Add the content below to the file
 
 ```yaml
-$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
-name: <your-name>
-type: online
-auth_mode: key
-traffic:
-  version1: 100
-deployments:
-  - name: version1    
-    app_insights_enabled: true
-    model: azureml:SimpsonsClassification-pytorch:1
-    code_configuration:
-      code: 
-        local_path: ./
-      scoring_script: score.py
-    environment: 
-      name: simpsons-inference
-      version: 1           
-      path: .
-      conda_file: file:conda.yml
-      docker:
-        image: mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04:20210727.v1
-    instance_type: Standard_F4s_v2
-    scale_settings:
-      scale_type: Manual
-      instance_count: 1
-      min_instances: 1
-      max_instances: 1
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+endpoint_name: <your-endpoint-name>
+name: version-1
+app_insights_enabled: true
+model: azureml:LegoSimpsons-pytorch:1
+code_configuration:
+  code: 
+    local_path: ./
+  scoring_script: score.py
+environment: 
+  conda_file: ./conda.yml
+  image: mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04:20210727.v1
+instance_type: Standard_F2s_v2
+instance_count: 1
 ```
-
-> Replace: \<your-name> with your unique name, like: henks-endpoint
 
 Use the command below to create a managed endpoint
 
 ```yaml
-az ml endpoint create --file deployment.yml
+az ml online-deployment create -f deployment.yml 
 ```
 
 ### Test the endpoint
