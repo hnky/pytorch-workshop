@@ -49,7 +49,7 @@ dependencies:
 
 ### Create a managed endpoint
 
-> Replace: \<your-endpoint-name> with your unique name, like: henks-endpoint-v1
+> Replace: <your-endpoint-name> with your unique name, like: henks-endpoint-v1
 
 ```
 az ml online-endpoint create -n <your-endpoint-name>
@@ -107,7 +107,7 @@ Add the content below to the file
 Use the command below to invoke the endpoint!
 
 ```yaml
-az ml endpoint invoke -n simpsons-endpoint --request-file request.json
+az ml online-endpoint invoke -n <your-endpoint-name> --request-file request.json
 ```
 
 As a result you show see that it has seen Bart Simpson on the image.
