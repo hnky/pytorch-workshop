@@ -21,7 +21,7 @@ mkdir deploy
 cd deploy
 
 # Download the scoring script
-wget https://raw.githubusercontent.com/GlobalAICommunity/back-together-2021/main/workshop-assets/amls/score.py
+wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/workshop-assets/amls/score.py
 ```
 
 > Stay in the same directory
