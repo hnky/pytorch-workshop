@@ -14,7 +14,7 @@ import torch.onnx
 
 ### Add References
 import argparse
-from azureml.core import Run, Workspace
+from azureml.core import Run,Workspace
 from azureml.core.model import Model
 
 ### Add run context for AML
@@ -24,16 +24,16 @@ run = Run.get_context()
 parser = argparse.ArgumentParser()
 parser.add_argument("--data-folder", type=str, dest="data_folder", help="data folder mounting point", default="")
 parser.add_argument("--num-epochs", type=int, dest="num_epochs", help="Number of epochs", default="")
-#parser.add_argument("--model-name", type=str, dest="model_name", help="Name of the registered Model", default="")
 parser.add_argument('--learning_rate', type=float, default=0.001, help='learning rate')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum')
+parser.add_argument('--train_output', type=str, dest="train_output", help="Data output folder", default="")
 
 args = parser.parse_args()
 data_path = args.data_folder
 num_epochs = args.num_epochs
-#model_name = args.model_name
 learning_rate = args.learning_rate
 momentum = args.momentum
+train_output = args.train_output
 
 ### Prepare the dataset
 data_transforms = {
@@ -147,30 +147,15 @@ model_ft = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler, num_
 
 # Save the model
 torch.save(model_ft, './outputs/model.pth')
+torch.save(model_ft, os.path.join(train_output,'model.pth'))
 
 # Save the labels
 with open('./outputs/labels.txt', 'w') as f:
     f.writelines(["%s\n" % item  for item in class_names])
 
-
-#run.upload_file(name='model/pytorch/labels.txt', path_or_stream="./outputs/labels.txt")
-#run.upload_file(name='model/pytorch/model.pth', path_or_stream="./outputs/model.pth")
-
-#tags = { "Conference":"<demo>" }
-#model = run.register_model(model_name=model_name+"-PyTorch", model_path='model/pytorch/', tags=tags)
-
-#print("== PyTorch Model Registered")
-#print('Name:', model.name)
-#print('Version:', model.version)
-
-# Export the model
-#print("== Export model to onnx ==")
-#x = torch.randn(1, 3, 224, 224).to(device)
-#torch.onnx.export(model_ft,x,"./outputs/model.onnx")
-
-#run.upload_file(name='model/onnx/model.onnx', path_or_stream="./outputs/model.onnx")
-
-#model = run.register_model(model_name=model_name+"-onnx", model_path='model/onnx/', tags=tags)
+# Save the labels
+with open(os.path.join(train_output,'labels.txt'), 'w') as f:
+    f.writelines(["%s\n" % item  for item in class_names])
 
 print("== Done == ")
 
