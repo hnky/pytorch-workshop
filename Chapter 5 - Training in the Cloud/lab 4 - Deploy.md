@@ -85,7 +85,7 @@ instance_count: 1
 Use the command below to create a managed endpoint
 
 ```yaml
-az ml online-deployment create -f deployment.yml 
+az ml online-deployment create -f deployment.yml --all-traffic
 ```
 
 ### Test the endpoint
