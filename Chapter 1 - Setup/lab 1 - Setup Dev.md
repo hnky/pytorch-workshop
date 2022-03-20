@@ -1,6 +1,6 @@
 # Lab 1 - Setup Dev Environment
 
-> Make sure you have a working Azure Subscription before starting this lab
+> Make sure you have a working Azure Subscription before starting this lab or redeem an Azure Pass on [microsoftazurepass.com](https://www.microsoftazurepass.com)
 
 ## Deploy a Development Container to Azure
 
