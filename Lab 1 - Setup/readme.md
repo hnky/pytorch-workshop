@@ -128,8 +128,7 @@ You are now connected to your Remote Dev Container!
 
 
 #### Update to the lastest versions
-1.  In the terminal type: " az extension remove -n ml"
-2.  In the terminal type: " az extension add -n ml"
+1.  In the terminal type: " az upgrade"
 
 > You are now ready to start developing using Visual Studio Code and a Remote Dev Container
 
