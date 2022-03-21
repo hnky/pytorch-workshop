@@ -61,7 +61,8 @@ az ml compute list --output table
 
 ## Review
 
-The setup of your workspace with compute is now completed
+The setup of your workspace with compute is now completed.    
+In this lab you have:
 
 * [ ] Created a resource group
 * [ ] Created an Azure Machine Learning Workspace
