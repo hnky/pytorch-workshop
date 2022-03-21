@@ -45,9 +45,7 @@ az configure --defaults workspace=<workspace-name> group=<resource-group-name>
 
 To train our model we need an Azure Machine Learning Compute cluster. To create a new compute cluster, use the following command.
 
-This command will create an Azure Machine Learning Compute cluster with 1 node that is always on and is using STANDARD\_NC6 virtual Machines.
-
->To speed up the training process you can use a GPU enabled NC6 machine
+This command will create an Azure Machine Learning Compute cluster with 1 node that is always on and is using Standard_NC4as_T4_v3 virtual Machines.
 
 ```
 az ml compute create --type amlcompute -n gpu-cluster --min-instances 1 --max-instances 1 --size Standard_NC4as_T4_v3 --tier low_priority
@@ -55,7 +53,7 @@ az ml compute create --type amlcompute -n gpu-cluster --min-instances 1 --max-in
 
 > View your created Azure Machine Learning Compute cluster on [https://ml.azure.com](https://ml.azure.com)
 
-> _Creating compute can take a few minutes to complete_
+> Creating compute can take up to 10 minutes to complete
 
 To see the list of created compute in your workspace you can type:
 
@@ -69,4 +67,5 @@ The setup of your workspace with compute is now completed
 
 * [ ] Created a resource group
 * [ ] Created an Azure Machine Learning Workspace
+* [ ] Configured a default resource group and workspace
 * [ ] Created Azure Machine Learning Compute Cluster&#x20;
