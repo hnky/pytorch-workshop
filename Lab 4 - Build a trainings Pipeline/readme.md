@@ -27,7 +27,7 @@ cd components
 mkdir src
 ```
 
-### Create the train component
+### Component 1 - Create the train component
 
 To define an Azure Machine Learning component, you must provide two files:
 
@@ -88,7 +88,7 @@ Create the component in your Azure Machine Learning workspace.
 az ml component create --file train.yml
 ```
 
-### Create the register model component
+###  Component 2 - Create the register model component
 
 ```
 code register.yml
@@ -134,7 +134,7 @@ az ml component create --file register.yml
 ```
 
 
-### Create the register model component
+###  Component 3 - Create the register model component
 
 ```
 code convert_to_onnx.yml
