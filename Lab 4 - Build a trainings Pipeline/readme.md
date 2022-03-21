@@ -155,7 +155,7 @@ wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20
 az ml component create --file convert_to_onnx.yml
 ```
 
-### Create the pipeline
+## Part 2 - Create the pipeline
 
 ```
 cd ..
@@ -210,6 +210,7 @@ jobs:
       model_file_name: "model.onnx"
 ```
 
+### Run the pipeline
 
 ```
 az ml job create -f pipeline.yml --stream
