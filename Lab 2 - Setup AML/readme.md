@@ -21,7 +21,7 @@ az group create --name <resource-group-name> --location <location>
 
 ## Create the Azure Machine Learning Workspace
 
-To create a new workspace where the services are automatically created, use the following command:
+To create a new workspace with all the related services, use the following command:
 
 ```
 az ml workspace create -n <workspace-name> -g <resource-group-name>
