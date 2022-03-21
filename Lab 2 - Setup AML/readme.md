@@ -33,7 +33,7 @@ az ml workspace create -n <workspace-name> -g <resource-group-name>
 
 >You can now view your workspace by visiting [https://ml.azure.com](https://ml.azure.com)
 
-### Make things easier
+### Make things easier by setting defaults
 
 After every az ml command you have to type "-w \<workspace-name> -g \<resource-group-name>". You can make everything a bit easier by settings the values for this parameters by default.
 
