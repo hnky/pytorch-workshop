@@ -58,7 +58,11 @@ command: python train.py --data ${{inputs.training_data}} --train_output ${{outp
 Download the trainings code
 
 ```
-wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/train.py src/train.py 
+wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/train.py -P src
+```
+
+```
+az ml component create --file train.yml
 ```
 
 ### Create the register model component
@@ -73,7 +77,7 @@ Add the content below to register.yml
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-name: Register model
+name: RegisterModel
 display_name: Register model after run
 version: 1
 
@@ -99,7 +103,11 @@ command: python register.py --model_assets_path ${{inputs.model_assets_path}} --
 ```
 
 ```
-wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/register.py src/register.py 
+wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/register.py -P src
+```
+
+```
+az ml component create --file register.yml
 ```
 
 
@@ -135,59 +143,74 @@ environment: azureml:AzureML-pytorch-1.10-ubuntu18.04-py38-cuda11-gpu:15
 command: python onnx.py --input_assets_path ${{inputs.input_assets_path}} --output_assets_path ${{outputs.output_assets_path}}
 ```
 
+
+
 ```
-wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/onnx.py src/onnx.py
+wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/onnx.py -P src
 ```
 
+
+
+```
+az ml component create --file convert_to_onnx.yml
+```
 
 ### Create the pipeline
 
+```
+cd ..
+
+code pipeline.yml
+```
 
 ```
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
 type: pipeline
 
-compute: azureml:OptimusPrime
-settings:
-  datastore: azureml:workspaceblobstore
+compute: azureml:gpu-cluster
 
 inputs:
-  training_data:
-    dataset: azureml:LegoSimpsons-v3:3
-
-outputs:
-  final_pipeline_output:
-    mode: upload
+  pipeline_job_input:
+    mode: ro_mount
+    dataset: azureml:LegoSimpsons:1
 
 jobs:
   train_model:
     type: component
-    component: file:./components/train.yml
+    component: azureml:TrainModel:1
     inputs:
-      training_data: ${{inputs.training_data}}
+      training_data: ${{inputs.pipeline_job_input}}
     outputs:
       train_output: 
         mode: upload
+      
   register_pytorch:
     type: component
-    component: file:./components/register.yml
+    component: azureml:RegisterModel:2
     inputs:
       model_assets_path: ${{jobs.train_model.outputs.train_output}}
-      model_name: "simpsons-classification-pytorch"
+      model_name: "pipeline-simpsons-pytorch"
       model_file_name: "model.pth"
+
   convert_to_onnx:
     type: component
-    component: file:./components/convert_to_onnx.yml
+    component: azureml:ConvertToOnnx:1
     inputs:
       input_assets_path: ${{jobs.train_model.outputs.train_output}}
     outputs:
       output_assets_path: 
         mode: upload
+
   register_onnx:
     type: component
-    component: file:./components/register.yml
+    component:  azureml:RegisterModel:2
     inputs:
       model_assets_path: ${{jobs.convert_to_onnx.outputs.output_assets_path}}
-      model_name: "simpsons-classification-onnx"
+      model_name: "pipeline-simpsons-onnx"
       model_file_name: "model.onnx"
+```
+
+
+```
+az ml job create -f pipeline.yml --stream
 ```
