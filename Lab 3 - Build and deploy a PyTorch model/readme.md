@@ -155,10 +155,9 @@ Now you have 2 versioned models that can classify Simpson Images in your Azure M
 
 ## Part 3 - Create an online Endpoint
 
-> In this part you are going to deploy the model in managed endpoint.
+> In this part you are going to deploy the model in an online endpoint.
 
-
-Before you continue you have to make sure you have "Microsoft.PolicyInsights" resource policy enabled in your Azure subscription. 
+Before you continue you have to make sure you have "Microsoft.PolicyInsights" resource policy enabled in your Azure subscription. This is mostly not yet enabled in Azure Pass subscription.
 
 ```bash
 az provider register -n 'Microsoft.PolicyInsights'
@@ -177,7 +176,7 @@ cd deploy
 wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/workshop-assets/amls/score.py
 ```
 
-> Stay in the same directory
+*Stay in the same directory*
 
 
 ### Create an online endpoint
