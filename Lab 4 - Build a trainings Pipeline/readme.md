@@ -32,9 +32,9 @@ mkdir src
 To define an Azure Machine Learning component, you must provide two files:
 
 - A component specification in the valid YAML component specification format. This file specifies the following information:
-Metadata: name, display_name, version, type, and so on.   
-Interface: inputs and outputs   
-Command, code, & environment: The command, code, and environment used to run the component    
+  - Metadata: name, display_name, version, type, and so on.   
+  - Interface: inputs and outputs   
+  - Command, code, & environment: The command, code, and environment used to run the component    
 - A script to provide the actual execution logic.
 
 
