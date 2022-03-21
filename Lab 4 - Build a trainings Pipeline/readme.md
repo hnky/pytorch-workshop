@@ -243,3 +243,19 @@ jobs:
 ```
 az ml job create -f pipeline.yml --stream
 ```
+
+Navigate to [Azure Machine Learning Studio](https://ml.azure.com) to view your pipeline running.
+
+![](img/aml-pipeline.jpg)
+
+### Recap
+In this lab you have:
+
+- [] Created 3 useable components
+- [] Create a pipeline
+- [] Run the pipeline
+
+
+
+
+
