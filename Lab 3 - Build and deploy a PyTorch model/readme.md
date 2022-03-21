@@ -5,6 +5,7 @@
 ## Part 1 - Data
 
 Every machine learning project start with data. For this lab we are going to a dataset that contains photos of 10 Lego Simpson figures.
+![Simpsons Dataset](images/dataset.png)
 
 
 ### Download the dataset
