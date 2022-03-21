@@ -1,6 +1,6 @@
 # Lab 2 - Setup Azure Machine Learning
 
-**Welcome to lab 2, in the previous lab you have setup your development enviroment, now it is time to setup your Azure Machine Learning workspace. In this workspace you can manage your complete model life cycle.**
+**Welcome to lab 2, in the [previous lab](../Lab%201%20-%20Setup) you have setup your development enviroment, now it is time to setup your Azure Machine Learning workspace. In this workspace you can manage your complete model life cycle.**
 
 ## Create a Azure Machine Learning Workspace
 
