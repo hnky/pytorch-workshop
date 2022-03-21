@@ -1,4 +1,6 @@
-# Build and deploy a PyTorch model
+# Lab 3 - Build and deploy a PyTorch model
+
+**In this lab you are going to train a PyTorch model on the compute cluster in Azure Machine learning you have created in the [previous lab](../Lab%202%20-%20Setup%20AML). When the training is done, you are going to take the model and deploy it to an online endpoint, so the model is available to it in an API**
 
 ## Part 1 - Data
 
