@@ -11,3 +11,4 @@ At the end of this hands-on lab you have gone through the complete life-cycle of
 - Lab 1 - [Setup your development environment](Lab%201%20-%20Setup)
 - Lab 2 - [Setup Azure Machine Learning](Lab%202%20-%20Setup%20AML)
 - Lab 3 - [Build and deploy a PyTorch model](Lab%203%20-%20Build%20and%20deploy%20a%20PyTorch%20model)
+- Lab 4 - [Build a trainings Pipeline](Lab%204%20-%20Build%20a%20trainings%20Pipeline)
