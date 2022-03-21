@@ -8,7 +8,7 @@ To get started we need to setup a few resources in Azure. Please make sure you h
 
 ### Create a resource group
 
-The Azure Machine Learning workspace must be created inside a resource group. You can use an existing resource group or create a new one. To create a new resource group, use the following command. Replace ```<resource-group-name>``` with the name to use for this resource group. Replace with ```<location>``` the Azure region to use for this resource group:
+The Azure Machine Learning workspace must be created inside a resource group. You can use an existing resource group or create a new one. To create a new resource group, use the following command. Replace ```<resource-group-name>``` with the name to use for this resource group. Replace ```<location>``` with the Azure region to use for this resource group:
 
 **Example name and location:**&#x20;
 
