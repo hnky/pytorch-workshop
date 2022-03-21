@@ -182,7 +182,7 @@ wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/workshop-asset
 
 ### Create an online endpoint
 
-> Replace: <your-endpoint-name> with your unique name, like: henks-endpoint-v1
+Replace: ```<your-endpoint-name>``` with your own unique name, like: henks-endpoint-v1.
 
 ```
 az ml online-endpoint create -n <your-endpoint-name>
