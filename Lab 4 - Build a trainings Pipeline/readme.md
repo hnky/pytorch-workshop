@@ -214,7 +214,7 @@ jobs:
       
   register_pytorch:
     type: component
-    component: azureml:RegisterModel:2
+    component: azureml:RegisterModel:1
     inputs:
       model_assets_path: ${{jobs.train_model.outputs.train_output}}
       model_name: "pipeline-simpsons-pytorch"
@@ -231,7 +231,7 @@ jobs:
 
   register_onnx:
     type: component
-    component:  azureml:RegisterModel:2
+    component:  azureml:RegisterModel:1
     inputs:
       model_assets_path: ${{jobs.convert_to_onnx.outputs.output_assets_path}}
       model_name: "pipeline-simpsons-onnx"
@@ -248,14 +248,18 @@ Navigate to [Azure Machine Learning Studio](https://ml.azure.com) to view your p
 
 ![](img/aml-pipeline.jpg)
 
+### See the created models
+
+The pipeline will deliver two models and register them in model management. To view them run the command below.
+
+```
+az ml model list -o table 
+```
+
+
 ### Recap
 In this lab you have:
 
-- [] Created 3 useable components
-- [] Create a pipeline
-- [] Run the pipeline
-
-
-
-
-
+- [ ] Created 3 useable components
+- [ ] Create a pipeline
+- [ ] Run the pipeline
