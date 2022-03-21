@@ -180,11 +180,16 @@ az ml component create --file convert_to_onnx.yml
 
 ## Part 2 - Create the pipeline
 
+Pipelines in AzureML let you sequence a collection of machine learning tasks/components into a workflow. Data Scientists typically iterate with scripts focusing on individual tasks such as data preparation, training, scoring, and so forth.
+
 ```
 cd ..
 
+# Create the YAML file that holds the pipeline configuration
 code pipeline.yml
 ```
+
+Add the content below to the ```pipeline.yml``` file.
 
 ```
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
