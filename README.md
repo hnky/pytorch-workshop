@@ -8,6 +8,7 @@ At the end of this hands-on lab you have gone through the complete life-cycle of
 | | |
 | --- | --- |
 | **Duration** | 3-4 hours |
+| **Level** | Beginner |
 
 ## Labs:
 
