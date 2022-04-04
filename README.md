@@ -5,6 +5,9 @@ You start with setting up your cloud workspace and learn how to manage your data
 
 At the end of this hands-on lab you have gone through the complete life-cycle of a model, from data to deployment using the Azure Machine Learning platform.
 
+| | | |
+| -- | -- |
+| **Duration** | 3-4 hours 
 
 ## Labs:
 
