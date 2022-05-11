@@ -60,7 +60,7 @@ The "Go to resource" button will bring you the screen above. Copy the IP address
 
 ![](img/7.png)
 
-1. Enter user@host in the field. Replace user with: globalai and host with the IP address from your deployment in the previous step.
+1. Enter user@host in the field. Replace user with: workshop and host with the IP address from your deployment in the previous step.
 2. Press enter
 3. A new VSCode window will open.
 4. A Windows Security alert might pop-up, if it does click: "Allow access"
@@ -75,7 +75,7 @@ Select: Continue
 
 ![](img/9-5.png)
 
-Enter the password: back2gether
+Enter the password: reactor22
 
 ![](img/10.png)
 
