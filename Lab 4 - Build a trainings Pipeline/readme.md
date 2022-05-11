@@ -26,7 +26,7 @@ Add the content below to train.yml
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-name: TrainModel
+name: trainmodel
 display_name: Train Pytorch Classification Model
 version: 1
 
@@ -47,8 +47,7 @@ outputs:
   train_output:
     type: path
 
-code:
-  local_path: ./src
+code: ./src
 
 environment: azureml:AzureML-pytorch-1.10-ubuntu18.04-py38-cuda11-gpu:15
 
@@ -77,7 +76,7 @@ Add the content below to register.yml
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-name: RegisterModel
+name: registermodel
 display_name: Register model after run
 version: 1
 
@@ -94,8 +93,7 @@ inputs:
     type: string
     default: "labels.txt" 
 
-code:
-  local_path: ./src
+code: ./src
 
 environment: azureml:AzureML-pytorch-1.10-ubuntu18.04-py38-cuda11-gpu:15
 
@@ -123,7 +121,7 @@ Add the content below to convert_to_onnx.yml
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-name: ConvertToOnnx
+name: convert2onnx
 display_name: Convert PyTorch Model to ONNX
 version: 1
 
@@ -135,21 +133,16 @@ outputs:
   output_assets_path:
     type: path
 
-code:
-  local_path: ./src
+code: ./src
 
 environment: azureml:AzureML-pytorch-1.10-ubuntu18.04-py38-cuda11-gpu:15
 
 command: python onnx.py --input_assets_path ${{inputs.input_assets_path}} --output_assets_path ${{outputs.output_assets_path}}
 ```
 
-
-
 ```
 wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/onnx.py -P src
 ```
-
-
 
 ```
 az ml component create --file convert_to_onnx.yml
@@ -166,46 +159,51 @@ code pipeline.yml
 ```
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
 type: pipeline
+experiment_name: Lego-Pipeline
+description: Pipeline to create a Lego Classifier in PyTorch
 
-compute: azureml:gpu-cluster
+settings:
+  default_datastore: azureml:workspaceartifactstore
+  default_compute: azureml:gpu-cluster
 
 inputs:
-  pipeline_job_input:
+  training_data:
     mode: ro_mount
-    dataset: azureml:LegoSimpsons:1
+    path: azureml:LegoSimpsons:1
 
 jobs:
   train_model:
-    type: component
-    component: azureml:TrainModel:1
+    type: command
+    component: azureml:trainmodel:1
     inputs:
-      training_data: ${{inputs.pipeline_job_input}}
+      training_data: ${{parent.inputs.training_data}}
+      epochs: 15
     outputs:
       train_output: 
         mode: upload
       
   register_pytorch:
-    type: component
-    component: azureml:RegisterModel:2
+    type: command
+    component: azureml:registermodel:1
     inputs:
-      model_assets_path: ${{jobs.train_model.outputs.train_output}}
+      model_assets_path: ${{parent.jobs.train_model.outputs.train_output}}
       model_name: "pipeline-simpsons-pytorch"
       model_file_name: "model.pth"
 
   convert_to_onnx:
-    type: component
-    component: azureml:ConvertToOnnx:1
+    type: command
+    component: azureml:convert2onnx:1
     inputs:
-      input_assets_path: ${{jobs.train_model.outputs.train_output}}
+      input_assets_path: ${{parent.jobs.train_model.outputs.train_output}}
     outputs:
       output_assets_path: 
         mode: upload
 
   register_onnx:
-    type: component
-    component:  azureml:RegisterModel:2
+    type: command
+    component:  azureml:registermodel:1
     inputs:
-      model_assets_path: ${{jobs.convert_to_onnx.outputs.output_assets_path}}
+      model_assets_path: ${{parent.jobs.convert_to_onnx.outputs.output_assets_path}}
       model_name: "pipeline-simpsons-onnx"
       model_file_name: "model.onnx"
 ```

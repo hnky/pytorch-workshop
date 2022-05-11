@@ -31,16 +31,16 @@ code dataset.yml
 Add this content to the file
 
 ```yaml
-$schema: https://azuremlschemas.azureedge.net/latest/dataset.schema.json
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
 name: LegoSimpsons
-version: 1
-local_path: ./data
+description: Dataset with 6 Lego Figures
+path: data
 ```
 
 Now run the CLI command to upload the data to your default datastore and create the dataset
 
 ```bash
-az ml dataset create -f dataset.yml
+az ml data create -f dataset.yml
 ```
 
 To see if the dataset is created you can list all the datasets in your workspace with the command below.
@@ -96,15 +96,18 @@ In this file we are going to configure how to execute and run our training file.
 ```yaml
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 experiment_name: SimpsonsClassification
-code:
-  local_path: ./train
+
+code: ./train
 command: python train.py --data-path ${{inputs.training_data}} --num-epochs 12 --model-name LegoSimpsons
+
 environment: azureml:AzureML-pytorch-1.10-ubuntu18.04-py38-cuda11-gpu:15
+
 compute: azureml:gpu-cluster
+
 inputs:
   training_data:
     mode: ro_mount
-    dataset: azureml:LegoSimpsons:1
+    path: azureml:LegoSimpsons:1
 ```
 
 Now we can create the job with the command below. The job takes around 5-10 minutes to complete.
@@ -198,8 +201,7 @@ name: version-1
 app_insights_enabled: true
 model: azureml:LegoSimpsons-pytorch:1
 code_configuration:
-  code: 
-    local_path: ./
+  code: ./
   scoring_script: score.py
 environment: azureml:AzureML-pytorch-1.7-ubuntu18.04-py37-cpu-inference:32
 instance_type: Standard_F2s_v2
@@ -209,7 +211,13 @@ instance_count: 1
 Use the command below to deploy the online endpoint deployment configuration and route all the traffic to this deployment.
 
 ```yaml
-az ml online-deployment create -f deployment.yml --all-traffic
+az ml online-deployment create -f deployment.yml
+```
+
+When the deployment is finished you can route all the traffic in the endpoint to this deployment.
+
+```yaml
+az ml online-endpoint update --name henk  --traffic "version-1=100"
 ```
   
 
