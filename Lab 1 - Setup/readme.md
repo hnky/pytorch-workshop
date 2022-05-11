@@ -1,5 +1,7 @@
 # Lab 1 - Setup Dev Environment
 
+**Welcome to the first lab. In this lab you are going to setup a development environment. We start with the deployment of a development container in a Azure Container Instance. Then we setup connect Visual Studio code for remote development and finally we make sure we have the latest updates for all the tooling.**
+
 > Make sure you have a working Azure Subscription before starting this lab or redeem an Azure Pass on [microsoftazurepass.com](https://www.microsoftazurepass.com)
 
 ## Deploy a Development Container to Azure

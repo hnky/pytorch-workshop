@@ -1,6 +1,13 @@
-# Build and deploy a PyTorch model
+# Lab 3 - Build and deploy a PyTorch model
+
+**In this lab you are going to train a PyTorch model on the compute cluster in Azure Machine learning you have created in the [previous lab](../Lab%202%20-%20Setup%20AML). When the training is done, you are going to take the model and deploy it to an online endpoint, so the model is available to it in an API**
 
 ## Part 1 - Data
+
+Every machine learning project start with data. For this lab we are going to a dataset that contains photos of 10 Lego Simpson figures.
+   
+![Simpsons Dataset](images/dataset.jpg)
+
 
 ### Download the dataset
 
@@ -151,10 +158,9 @@ Now you have 2 versioned models that can classify Simpson Images in your Azure M
 
 ## Part 3 - Create an online Endpoint
 
-> In this part you are going to deploy the model in managed endpoint.
+> In this part you are going to deploy the model in an online endpoint.
 
-
-Before you continue you have to make sure you have "Microsoft.PolicyInsights" resource policy enabled in your Azure subscription. 
+Before you continue you have to make sure you have "Microsoft.PolicyInsights" resource policy enabled in your Azure subscription. This is mostly not yet enabled in Azure Pass subscription.
 
 ```bash
 az provider register -n 'Microsoft.PolicyInsights'
@@ -173,12 +179,12 @@ cd deploy
 wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/workshop-assets/amls/score.py
 ```
 
-> Stay in the same directory
+*Stay in the same directory*
 
 
 ### Create an online endpoint
 
-> Replace: <your-endpoint-name> with your unique name, like: henks-endpoint-v1
+Replace: ```<your-endpoint-name>``` with your own unique name, like: henks-endpoint-v1.
 
 ```
 az ml online-endpoint create -n <your-endpoint-name>

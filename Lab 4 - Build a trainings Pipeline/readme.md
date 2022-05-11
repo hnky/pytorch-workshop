@@ -1,26 +1,49 @@
 # Lab 4 - Build a trainings Pipeline
 
+**In this lab we are going create a reusable pipeline to train and retrain a model and convert it from PyTorch to ONNX**
+
 
 ## Part 1 - Create components
 
+**The first thing we are going to do is create reusable components.**
 
-### 
+**An Azure Machine Learning component is a self-contained piece of code that does one step in a machine learning pipeline. Components are the building blocks of advanced machine learning pipelines. Components can do tasks such as data processing, model training, model scoring, and so on.**
+
+[Learn more about components in pipelines](https://docs.microsoft.com/azure/machine-learning/how-to-create-component-pipelines-cli)
 
 ```
+# Go back to the home directory
+cd
+
+# Create a directory for the pipeline
 mkdir pipeline
 cd pipeline
+
+# Create a directory for the components
 mkdir components
 cd components
+
+# Create a directory for the source scripts (don't go to the directory)
 mkdir src
 ```
 
-### Create the train component
+### Component 1 - Create the train component
+
+To define an Azure Machine Learning component, you must provide two files:
+
+- A component specification in the valid YAML component specification format. This file specifies the following information:
+  - Metadata: name, display_name, version, type, and so on.   
+  - Interface: inputs and outputs   
+  - Command, code, & environment: The command, code, and environment used to run the component    
+- A script to provide the actual execution logic.
+
 
 ```
+# Create the component specification file
 code train.yml
 ```
 
-Add the content below to train.yml
+Add the content below to component specification file ```train.yml```
 
 ```
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
@@ -54,17 +77,17 @@ environment: azureml:AzureML-pytorch-1.10-ubuntu18.04-py38-cuda11-gpu:15
 command: python train.py --data ${{inputs.training_data}} --train_output ${{outputs.train_output}} --num-epochs ${{inputs.epochs}} --learning_rate ${{inputs.learning_rate}} --momentum ${{inputs.momentum}}
 ```
 
-Download the trainings code
-
+Download the trainings code:
 ```
 wget https://raw.githubusercontent.com/hnky/pytorch-workshop/main/Lab%204%20-%20Build%20a%20trainings%20Pipeline/scripts/train.py -P src
 ```
 
+Create the component in your Azure Machine Learning workspace.
 ```
 az ml component create --file train.yml
 ```
 
-### Create the register model component
+###  Component 2 - Create the register model component
 
 ```
 code register.yml
@@ -109,7 +132,7 @@ az ml component create --file register.yml
 ```
 
 
-### Create the register model component
+###  Component 3 - Create the register model component
 
 ```
 code convert_to_onnx.yml
@@ -150,11 +173,16 @@ az ml component create --file convert_to_onnx.yml
 
 ## Part 2 - Create the pipeline
 
+Pipelines in AzureML let you sequence a collection of machine learning tasks/components into a workflow. Data Scientists typically iterate with scripts focusing on individual tasks such as data preparation, training, scoring, and so forth.
+
 ```
 cd ..
 
+# Create the YAML file that holds the pipeline configuration
 code pipeline.yml
 ```
+
+Add the content below to the ```pipeline.yml``` file.
 
 ```
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
@@ -213,3 +241,23 @@ jobs:
 ```
 az ml job create -f pipeline.yml --stream
 ```
+
+Navigate to [Azure Machine Learning Studio](https://ml.azure.com) to view your pipeline running.
+
+![](img/aml-pipeline.jpg)
+
+### See the created models
+
+The pipeline will deliver two models and register them in model management. To view them run the command below.
+
+```
+az ml model list -o table 
+```
+
+
+### Recap
+In this lab you have:
+
+- [ ] Created 3 useable components
+- [ ] Create a pipeline
+- [ ] Run the pipeline
