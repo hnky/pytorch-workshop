@@ -7,7 +7,7 @@
 ## Deploy a Development Container to Azure
 
 1. Click the "Deploy to Azure" button below\
-   [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FGlobalAICommunity%2Fdevcontainer%2Fmain%2Fazuredeploy.json)
+   [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhnky%2Faml-devcontainer%2Fmain%2Fazuredeploy.json)
 2. Sign in with your Azure account that has access to the subscription you want to use
 3. You should see the screen below
 
