@@ -88,25 +88,6 @@ You are now connected to your Remote Dev Container!
 1. Open a Terminal, you can do this using the Top menu > Terminal > New Terminal
 2. The terminal appears at the bottom of VSCode
 
-#### Install additional extensions
-
-1. Click the extensions icon on the left
-2. Search for: ms-toolsai.jupyter
-3. Click install
-4. Search for: ms-python.python
-5. Click install
-6. Search for: REST Client
-7. Click install
-
-![](img/12.png)
-
-1. To activate the extensions you need to reload VSCode
-2. In the Top Menu click "View" > Command Palette (crtl-shift-p)
-3. Type: "reload"
-4. Select: "Developer Reload Window"
-5. VSCode will reload
-6. It will ask for the password again, enter the password: back2gether
-
 #### In the terminal use the Azure CLI to login into you Azure account
 
 ![](img/13.png)
