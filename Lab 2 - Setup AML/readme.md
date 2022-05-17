@@ -46,7 +46,7 @@ To train our model we need an Azure Machine Learning Compute cluster. To create 
 This command will create an Azure Machine Learning Compute cluster with 1 node that is always on and is using Standard_NC4as_T4_v3 virtual Machines.
 
 ```
-az ml compute create --type amlcompute -n gpu-cluster --min-instances 1 --max-instances 1 --size Standard_NC4as_T4_v3 --tier low_priority
+az ml compute create --type amlcompute -n gpu-cluster --min-instances 1 --max-instances 1 --size Standard_NC6
 ```
 
 > View your created Azure Machine Learning Compute cluster on [https://ml.azure.com](https://ml.azure.com)
